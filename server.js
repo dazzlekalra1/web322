@@ -14,11 +14,11 @@
 
 *
 
-* Name:Ritish Sharma Student ID: 146407226 Date: 21 March 2024
+* Name: Dazzle Kalra Student ID:  Date: 21 March 2024
 
 *
 
-* Published URL:https://github.com/Glitched21/Web322
+* Published URL:https://zany-cyan-hare-hem.cyclic.app
 
 *
 
