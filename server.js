@@ -20,6 +20,8 @@
 
 * Published URL:https://zany-cyan-hare-hem.cyclic.app
 
+* Hi prof, I may have accidentally pushed my .env file to GitHub when I shouldn't have. I was constantly pushing my changes to GitHub.
+
 *
 
 ********************************************************************************/
