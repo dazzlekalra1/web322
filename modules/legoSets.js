@@ -2,10 +2,6 @@ require('dotenv').config();
 const { rejects } = require('assert');
 const { resolve } = require('path');
 const Sequelize = require('sequelize');
-//const setData = require("../data/setData");
-//const themeData = require("../data/themeData");
-
-//creating the an object of sequelize to connect to the database
 let sequelize = new Sequelize('SenecaDB', 'SenecaDB_owner', 'cr9oZGStl0TC', {
   host: 'ep-sweet-wildflower-a5g9ff6v-pooler.us-east-2.aws.neon.tech',
   dialect: 'postgres',
@@ -16,12 +12,10 @@ let sequelize = new Sequelize('SenecaDB', 'SenecaDB_owner', 'cr9oZGStl0TC', {
 
 });
 
-//sequelize authenticate()
 sequelize
   .authenticate()
   .then(() => { console.log(`connection successful`) })
   .catch((err) => { console.log(`connection failed`) });
-//creating model 1
 const Theme = sequelize.define('Theme',
   {
     id: {
@@ -39,7 +33,6 @@ const Theme = sequelize.define('Theme',
 
 );
 
-//creating model 2
 const Set = sequelize.define('Set',
   {
     set_num: {
@@ -57,26 +50,7 @@ const Set = sequelize.define('Set',
     updatedAt: false,
   }
 )
-//relationship between the models
 Set.belongsTo(Theme, { foreignKey: 'theme_id' });
-
-
-
-
-
-
-//let sets = [];
-
-// function initialize() {
-//   return new Promise((resolve, reject) => {
-//     setData.forEach(setElement => {
-//       let setWithTheme = { ...setElement, theme: themeData.find(themeElement => themeElement.id == setElement.theme_id).name }
-//       sets.push(setWithTheme);
-//       resolve();
-//     });
-//   });
-
-// }
 
  function initialize() {
   return new Promise(async(resolve, reject) => {
@@ -130,7 +104,6 @@ function getSetsByTheme(theme) {
 
 }
 
-//add sets
 function addSet(setData){
   return new Promise(async (resolve, reject) => {
     try {
@@ -139,7 +112,6 @@ function addSet(setData){
     } catch (err) {
       reject(err);
       throw err;
-      //reject(err.errors[0].message);
     }
 
   });
@@ -177,36 +149,3 @@ function deleteSet(set_num1) {
 
 
 module.exports = { initialize, getAllSets, getSetByNum, getSetsByTheme, getAllThemes,addSet, editSet, deleteSet }
-
-
-
-// sequelize
-//   .sync()
-//   .then( async () => {
-//     try{
-//       await Theme.bulkCreate(themeData);
-//       await Set.bulkCreate(setData); 
-//       console.log("-----");
-//       console.log("data inserted successfully");
-//     }catch(err){
-//       console.log("-----");
-//       console.log(err.message);
-
-//       // NOTE: If you receive the error:
-
-//       // insert or update on table "Sets" violates foreign key constraint //"Sets_theme_id_fkey"
-
-//       // it is because you have a "set" in your collection that has a "theme_id" that //does not exist in the "themeData".   
-
-//       // To fix this, use PgAdmin to delete the newly created "Themes" and "Sets" tables, //fix the error in your .json files and re-run this code
-//     }
-
-//     process.exit();
-//   })
-//   .catch((err) => {
-//     console.log('Unable to connect to the database:', err);
-//   });
-
-
-
-

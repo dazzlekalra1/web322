@@ -60,7 +60,6 @@ app.post('/lego/addSet', async (req, res) => {
   } catch (err) {
     const errorMessage = err.message || 'An unknown error occurred.';
     res.render('500', { message: `I'm sorry, but we have encountered the following error: ${errorMessage}` });
-    //res.render('500', {message: `I'am sorry, but we have encountered the following error ${err}`})
   }
 })
 
@@ -127,7 +126,3 @@ legoData.initialize().then(()=>{
 }).catch(err => {
   console.log(err);
 });
-
-
-//class="block text-gray-700 font-medium"
-//class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300"
