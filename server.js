@@ -1,6 +1,6 @@
 /********************************************************************************
 
-* WEB322 – Assignment 05
+* WEB322 – Assignment 06
 
 *
 
@@ -14,7 +14,7 @@
 
 *
 
-* Name: Dazzle Kalra Student ID: 118193226 Date: 2nd April 2024
+* Name: Dazzle Kalra Student ID: 118193226 Date: 17th April 2024
 
 *
 
@@ -27,8 +27,9 @@
 ********************************************************************************/
 
 
-
+const clientSessions = require("client-sessions")
 const legoData = require("./modules/legoSets");
+const authData = require("./modules/auth-service");
 const path = require("path");
 const express = require('express');
 const app = express();
@@ -36,6 +37,20 @@ const app = express();
 
 
 const HTTP_PORT = process.env.PORT || 8080;
+
+app.use(
+  clientSessions({
+    cookieName: 'session', 
+    secret: 'dk49fmRM3mOIWu3j46msi5ImFhdjFw044', 
+    duration: 60 * 1000, 
+    activeDuration: 1000 * 60,
+  })
+);
+
+app.use((req, res, next)=>{
+  res.locals.session = req.session;
+  next();
+});
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
@@ -127,4 +142,23 @@ legoData.initialize().then(()=>{
   app.listen(HTTP_PORT, () => { console.log(`server listening on: ${HTTP_PORT}`) });
 }).catch(err => {
   console.log(err);
+});
+
+legoData.initialize()
+.then(function(){
+    app.listen(HTTP_PORT, function(){
+        console.log(`app listening on:  ${HTTP_PORT}`);
+    });
+}).catch(function(err){
+    console.log(`unable to start server: ${err}`);
+});
+
+legoData.initialize()
+.then(authData.initialize)
+.then(function(){
+    app.listen(HTTP_PORT, function(){
+        console.log(`app listening on:  ${HTTP_PORT}`);
+    });
+}).catch(function(err){
+    console.log(`unable to start server: ${err}`);
 });
